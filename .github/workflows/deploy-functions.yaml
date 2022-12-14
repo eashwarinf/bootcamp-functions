@@ -18,17 +18,19 @@ jobs:
         "common"
         )
 
-  deploy:
-    needs: generate-matrix
-    name: Deploy to Cognite Functions
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        function: ${{ fromJson(needs.generate-matrix.outputs.folders) }}
-        # Add environments to deploy to.
-        # Each environment should have a corresponding github environment with secrets.
-        environment:
-          - test
+deploy:
+  needs: generate-matrix
+  name: Deploy to Cognite Functions
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      function: ${{ fromJson(needs.generate-matrix.outputs.folders) }}
+      # Add environments to deploy to.
+      # Each environment should have a corresponding github environment with secrets.
+      environment:
+        - test
+        - prod
+
 
     environment: ${{ matrix.environment }}
 
