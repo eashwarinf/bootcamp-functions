@@ -31,7 +31,6 @@ deploy:
         - test
         - prod
 
-
     environment: ${{ matrix.environment }}
 
     steps:
